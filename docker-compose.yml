@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  vault:
+    image: "vault:1.7.1"
+    ports:
+      - "8200:8200"
+    volumes:
+      - ./file:/vault/file:rw
+      - ./config:/vault/config:rw
+    cap_add:
+      - IPC_LOCK
+    entrypoint: vault server -config=/vault/config/vault.json
