@@ -4,9 +4,9 @@ import (
 	"os"
 
 	"github.com/hashicorp/go-hclog"
-	vaultExchange "github.com/tanishqjasoria/vault-fin/tree/main/vault-plugins/vault-exchange"
 	"github.com/hashicorp/vault/api"
 	"github.com/hashicorp/vault/sdk/plugin"
+	vaultExchange "github.com/tanishqjasoria/vault-fin/vault-plugins/vault-exchange"
 )
 
 func main() {
