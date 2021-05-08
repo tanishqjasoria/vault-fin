@@ -1,4 +1,4 @@
-package vault_eth
+package vaultEth
 
 import (
 	"context"

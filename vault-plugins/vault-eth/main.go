@@ -1,26 +1,30 @@
-package vault_eth
+package main
 
 import (
-	"github.com/hashicorp/vault/sdk/helper/pluginutil"
-	"log"
 	"os"
 
+	"github.com/hashicorp/go-hclog"
+	vaultEth "github.com/tanishqjasoria/vault-fin/tree/main/vault-plugins/vault-eth"
+	"github.com/hashicorp/vault/api"
 	"github.com/hashicorp/vault/sdk/plugin"
 )
 
 func main() {
-	apiClientMeta := &pluginutil.APIClientMeta{}
+	apiClientMeta := &api.PluginAPIClientMeta{}
 	flags := apiClientMeta.FlagSet()
 	flags.Parse(os.Args[1:])
 
 	tlsConfig := apiClientMeta.GetTLSConfig()
-	tlsProviderFunc := pluginutil.VaultPluginTLSProvider(tlsConfig)
+	tlsProviderFunc := api.VaultPluginTLSProvider(tlsConfig)
 
-	if err := plugin.Serve(&plugin.ServeOpts{
-		BackendFactoryFunc: Factory,
+	err := plugin.Serve(&plugin.ServeOpts{
+		BackendFactoryFunc: vaultEth.Factory,
 		TLSProviderFunc:    tlsProviderFunc,
-	}); err != nil {
-		log.Println(err)
-		log.Fatal(err)
+	})
+	if err != nil {
+		logger := hclog.New(&hclog.LoggerOptions{})
+
+		logger.Error("plugin shutting down", "error", err)
+		os.Exit(1)
 	}
 }

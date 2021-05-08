@@ -1,4 +1,4 @@
-package vault_eth
+package vaultExchange
 
 import (
 	"context"
@@ -18,7 +18,7 @@ func Backend(c *logical.BackendConfig) backend {
 		BackendType: logical.TypeLogical,
 		Secrets: []*framework.Secret{},
 		Paths: framework.PathAppend(
-			AccountPaths(&b),
+			// Add paths here
 		),
 		PathsSpecial: &logical.Paths{
 			// add path access req here
