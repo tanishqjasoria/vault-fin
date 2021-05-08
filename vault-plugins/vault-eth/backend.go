@@ -7,21 +7,21 @@ import (
 	"github.com/hashicorp/vault/sdk/logical"
 )
 
-type backed struct {
+type backend struct {
 	*framework.Backend
 }
 
-func Backend(c *logical.BackendConfig) *backend {
+func Backend(c *logical.BackendConfig) backend {
 	var b backend
 
 	b.Backend = &framework.Backend{
 		BackendType: logical.TypeLogical,
 		Secrets: []*framework.Secret{},
 		Paths: framework.PathAppend(
-			// Add paths here
+			AccountPaths(&b),
 		),
 		PathsSpecial: &logical.Paths{
-			// add path access req herre
+			// add path access req here
 		},
 	}
 	return b

@@ -1,11 +1,11 @@
 package vault_eth
 
 import (
-"log"
-"os"
+	"log"
+	"os"
 
-"github.com/hashicorp/vault/api"
-"github.com/hashicorp/vault/sdk/plugin"
+	"github.com/hashicorp/vault/api"
+	"github.com/hashicorp/vault/sdk/plugin"
 )
 
 func main() {
