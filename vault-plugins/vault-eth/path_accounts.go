@@ -1,10 +1,10 @@
 package vault_eth
 
 import (
-	"bytes"
 	"context"
 	wallet "../ethereum-utils"
-
+	"github.com/hashicorp/vault/sdk/framework"
+	"github.com/hashicorp/vault/sdk/logical"
 )
 
 func AccountPaths(backend *backend) []*framework.Path {
@@ -14,10 +14,10 @@ func AccountPaths(backend *backend) []*framework.Path {
 		{
 			Pattern: "accounts/",
 			Callbacks: map[logical.Operation]framework.OperationFunc{
-				logical.ListOperation: backend.ListAccounts
+				logical.ListOperation: backend.ListAccounts,
 			},
 			HelpSynopsis: "List all the ethereum accounts",
-			HelpDescription: "Everything would be listed"
+			HelpDescription: "Everything would be listed",
 		},
 
 		// Import a new account at the given name path
@@ -28,8 +28,7 @@ func AccountPaths(backend *backend) []*framework.Path {
 					Creates (or updates) an Ethereum account: an account controlled by a private key. Also
 					The generator produces a high-entropy passphrase with the provided length and requirements.
 			`,
-			Fields: map[string]*framework.FieldSchema
-			{
+			Fields: map[string]*framework.FieldSchema{
 				"name": {Type: framework.TypeString},
 				"mnemonic": {
 					Type:        framework.TypeString,
@@ -66,8 +65,7 @@ func AccountPaths(backend *backend) []*framework.Path {
 					Creates (or updates) an Ethereum account: an account controlled by a private key. Also
 					The generator produces a high-entropy passphrase with the provided length and requirements.
 			`,
-			Fields: map[string]*framework.FieldSchema
-			{
+			Fields: map[string]*framework.FieldSchema{
 				"name": {Type: framework.TypeString},
 				"mnemonic": {
 					Type:        framework.TypeString,

@@ -1,10 +1,10 @@
 package vault_eth
 
 import (
+	"github.com/hashicorp/vault/sdk/helper/pluginutil"
 	"log"
 	"os"
 
-	"github.com/hashicorp/vault/api"
 	"github.com/hashicorp/vault/sdk/plugin"
 )
 
